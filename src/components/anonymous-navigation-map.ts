@@ -2,8 +2,7 @@ import type { NavigationItem } from '@/types/app'
 
 const map: NavigationItem[] = [
   {
-    to: '/',
-    ref: 'services',
+    to: '/home#services',
     title: 'services',
   },
   {

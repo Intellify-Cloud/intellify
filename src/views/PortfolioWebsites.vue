@@ -1,6 +1,6 @@
 <template>
   <div class="mt-32 section">
-    <div class="w-1/2" ref="services">
+    <div class="w-full md:w-1/2">
       <div class="text-2xl font-bold">Portfolio websites from only R295 per month.</div>
       <p>The internet, mobile phones, social media and search engines have changed marketing in a fundamental way. If
         customers can’t easily find you you will lose business. We have years of experience in building websites. We

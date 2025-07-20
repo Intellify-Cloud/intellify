@@ -1,16 +1,16 @@
 <template>
   <div class="mt-32 section">
     <div v-if="status === 'sent'"
-      class="flex flex-col justify-center items-center h-32 text-2xl font-bold text-green-500 border rounded w-2/5 mb-4">
+      class="flex flex-col justify-center items-center h-32 text-2xl font-bold text-green-500 border rounded w-full md:w-2/5 p-4 mb-4 text-center">
       <span>Thank you! Your message has been sent successfully.</span>
     </div>
     <div v-else-if="status === 'error'"
-      class="flex flex-col justify-center items-center h-32 text-2xl border rounded w-2/5 mb-4">
+      class="flex flex-col justify-center items-center h-32 text-2xl border rounded w-full md:w-2/5 p-4 mb-4 text-center">
       <span class="font-bold text-red-500">Oops! Something went wrong. Please try again later.</span>
       <span class="text-xl">You are welcome to e-mail us at <a
           href="mailto:support@example.com">support@example.com</a></span>
     </div>
-    <v-form v-if="!busy" @submit.prevent="handleSubmit" class="w-2/5">
+    <v-form v-if="!busy" @submit.prevent="handleSubmit" class="w-full md:w-2/5">
       <div style=" position: absolute; left: -9999px;" aria-hidden="true">
         <label>Location</label>
         <input v-model="state.location" type="text" tabindex="-1" autocomplete="off" />
@@ -25,7 +25,7 @@
         Send Message
       </v-btn>
     </v-form>
-    <div v-else class="flex flex-col justify-center items-center h-32 border rounded w-2/5">
+    <div v-else class="flex flex-col justify-center items-center h-32 border rounded w-full md:w-2/5 px-4">
       <v-progress-circular indeterminate color="primary" size="40" width="5" />
       <p class="text-lg font-bold pt-4">Sending your message...</p>
     </div>

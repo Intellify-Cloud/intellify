@@ -26,7 +26,27 @@ const router = createRouter({
       name: 'privacy-policy',
       component: () => import('../views/PrivacyPolicy.vue'),
     },
+    {
+      path: '/sign-in',
+      name: 'sign-in',
+      component: () => import('../views/SignIn.vue'),
+    },
   ],
+  scrollBehavior(to, from, savedPosition) {
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: 'smooth', // or 'auto'
+        top: 64,
+      }
+    }
+
+    if (savedPosition) {
+      return savedPosition
+    }
+
+    return { top: 0 }
+  },
 })
 
 router.beforeEach(async (to) => {

@@ -6,7 +6,7 @@
           <div class="flex flex-col justify-center items-center h-[800px] p-4">
             <h2 class="font-bold text-4xl text-white text-shadow-lg text-shadow-gray-500">
               Reach more customers</h2>
-            <h1 class="font-bold text-6xl text-gray-200 text-shadow-lg text-shadow-gray-700 my-4 uppercase">
+            <h1 class="font-bold text-6xl text-gray-200 text-shadow-lg text-shadow-gray-700 my-4 uppercase text-center">
               Go Online. Grow Online.</h1>
             <v-btn class="m-8 h-12 rounded-full">Contact Us Today</v-btn>
           </div>
@@ -14,7 +14,7 @@
       </v-parallax>
     </div>
     <div class="section">
-      <div class="w-1/2 text-center" ref="services">
+      <div class="w-full md:w-1/2 text-center" id="services">
         <header>Services</header>
         <p>Welcome to Intellify! We understand that starting a website can be overwhelming, from setting up a domain to
           managing the high capital expenses associated with it. That's where we step in to make the process easy and
@@ -87,7 +87,6 @@
 <script setup lang="ts">
 import { useMessageBus } from '@/stores/message-bus';
 import { mdiMonitorCellphone, mdiSpeedometer, mdiWeb } from '@mdi/js';
-const services = useTemplateRef("services")
 
 const messageBus = useMessageBus();
 
@@ -120,13 +119,5 @@ function openSite(url: string) {
 
 onMounted(() => {
   messageBus.emit('goto-top');
-
-  messageBus.on("goto-services", () => {
-    if (!services.value) {
-      return;
-    }
-
-    messageBus.emit("scroll-to", { offset: services.value.getBoundingClientRect().top });
-  });
 });
 </script>

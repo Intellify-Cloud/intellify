@@ -1,31 +1,6 @@
 <template>
-  <div
-    class="flex flex-row w-full h-32 items-center z-50 fixed transition-all duration-500 ease-in-out bg-surface/50 dark:bg-surface--dark/50"
-    ref="navbar">
-    <div class="flex flex-row justify-center w-2/3 mx-auto">
-      <div class="flex flex-col cursor-pointer text-accent" @click="$router.push('/')">
-        <div class="text-4xl font-bold">intellify</div>
-        <div class="text-sm">Go online. Grow online.</div>
-      </div>
-      <div class="flex flex-row flex-grow items-center justify-end gap-8 relative">
-        <v-btn v-for="item in items" :key="item.title" variant="text" flat class="rounded-full font-light"
-          @click="navigateTo(item)">
-          {{ item.title }}
-        </v-btn>
-      </div>
-      <div class="flex flex-row items-center justify-end gap-2 ml-8">
-        <v-switch class="mr-2" v-model="isDarkTheme" :false-icon="mdiWhiteBalanceSunny" :true-icon="mdiWeatherNight"
-          hide-details />
-        <v-btn v-if="!sessionStore.isAuthenticated" flat class="rounded-full" :append-icon="mdiLogin" variant="text"
-          @click.prevent="signIn">{{ $t("sign-in")
-          }}</v-btn>
-        <v-btn v-else :icon="mdiDotsVertical" variant="text"
-          @click.stop="showProfileDrawer = !showProfileDrawer"></v-btn>
-      </div>
-    </div>
-  </div>
   <v-app-bar v-if="sessionStore.isAuthenticated" class="flex flex-row items-center h-32 bg-transparent w-2/3 mx-auto"
-    ref="app-bar" flat :extended="!sessionStore.isAuthenticated">
+    flat :extended="!sessionStore.isAuthenticated">
     <div v-if="!$vuetify.display.mobile && !sessionStore.isAuthenticated"
       class="flex flex-row flex-grow items-center justify-end gap-8 relative">
       <v-btn v-for="item in items" :key="item.title" class="rounded-full font-light" @click="navigateTo(item)">
@@ -50,12 +25,40 @@
         <v-switch class="mr-2" v-model="isDarkTheme" :false-icon="mdiWhiteBalanceSunny" :true-icon="mdiWeatherNight"
           hide-details />
         <v-btn v-if="!sessionStore.isAuthenticated" :append-icon="mdiLogin" @click.prevent="signIn">{{ $t("sign-in")
-          }}</v-btn>
+        }}</v-btn>
         <v-btn v-else :icon="mdiDotsVertical" variant="text"
           @click.stop="showProfileDrawer = !showProfileDrawer"></v-btn>
       </div>
     </template>
   </v-app-bar>
+  <div v-else
+    class="flex flex-row items-center w-full h-32 z-50 fixed transition-all duration-500 ease-in-out bg-surface/50 dark:bg-surface--dark/50"
+    ref="navbar">
+    <v-btn :icon="mdiMenu" @click.stop="showNavigationDrawer = !showNavigationDrawer" class="block md:hidden ml-4"
+      flat></v-btn>
+    <div class="flex flex-row items-center justify-between md:justify-center w-full md:w-2/3 mx-auto">
+      <div class="flex flex-col cursor-pointer text-accent min-w-40 pl-2 md:pl-0" @click="$router.push('/')">
+        <div class="text-4xl font-bold">intellify</div>
+        <div class="text-sm">Go online. Grow online.</div>
+      </div>
+      <div class="hidden md:flex md:flex-row md:flex-grow items-center justify-end gap lg:gap-6 relative ">
+        <v-btn v-for="item in items" :key="item.title" variant="text" flat class="rounded-full font-light"
+          @click="navigateTo(item)">
+          {{ item.title }}
+        </v-btn>
+      </div>
+      <div class="flex flex-row items-center justify-end gap-2 mx-2 lg:ml-8 min-w-40">
+        <v-switch class="mr-2" v-model="isDarkTheme" :false-icon="mdiWhiteBalanceSunny" :true-icon="mdiWeatherNight"
+          hide-details />
+        <v-btn v-if="!sessionStore.isAuthenticated" flat class="rounded-full" :append-icon="mdiLogin" variant="text"
+          @click.prevent="signIn">{{ $t("sign-in")
+          }}</v-btn>
+        <v-btn v-else :icon="mdiDotsVertical" variant="text"
+          @click.stop="showProfileDrawer = !showProfileDrawer"></v-btn>
+      </div>
+    </div>
+  </div>
+
   <v-navigation-drawer disable-resize-watcher v-model="showNavigationDrawer" class="fixed">
     <v-list>
       <v-list-item v-for="item in items" :key="item.title" @click="navigateTo(item)" :title="item.title"></v-list-item>
@@ -73,7 +76,7 @@
 <script setup lang="ts">
 import authenticatedNavigationMap from "./authenticated-navigation-map";
 import navigationMap from "./anonymous-navigation-map";
-import { mdiDotsVertical, mdiLogin, mdiLogout, mdiWhiteBalanceSunny, mdiWeatherNight } from '@mdi/js';
+import { mdiDotsVertical, mdiLogin, mdiLogout, mdiWhiteBalanceSunny, mdiWeatherNight, mdiMenu } from '@mdi/js';
 import { computed, ref, watch } from "vue";
 import { useSessionStore } from "@/stores/session";
 import { useI18n } from "vue-i18n";
@@ -81,7 +84,9 @@ import { useTheme } from 'vuetify';
 import type { NavigationItem } from "@/types/app";
 import router from "@/router";
 import { useMessageBus } from "@/stores/message-bus";
+import { useApplicationStore } from "@/stores/application";
 
+const applicationStore = useApplicationStore();
 const messageBus = useMessageBus();
 const navbarElement = useTemplateRef("navbar")
 const sessionStore = useSessionStore();
@@ -164,7 +169,7 @@ const handleScroll = () => {
 onMounted(() => {
   window.addEventListener('scroll', handleScroll);
 
-  useMessageBus().emit("navbar-initialized", navbarElement.value);
+  applicationStore.addApplicationRef({ name: "navbar", ref: navbarElement });
 });
 
 onUnmounted(() => {
