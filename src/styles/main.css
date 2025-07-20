@@ -1,0 +1,59 @@
+@import "tailwindcss" important;
+
+@custom-variant dark (&:where(.v-theme--dark, .v-theme--dark *));
+
+@theme {
+  --color-primary: #2c3e50;
+  --color-accent: #3498db;
+  --color-highlight: #6a9ecb;
+  --color-surface: #f5f7fa;
+  --color-border: #dde3e9;
+  --color-success: #2ecc71;
+  --color-text: #2c3e50;
+
+  --color-primary--dark: #f5f7fa;
+  --color-accent--dark: #3498db;
+  --color-highlight--dark: #41a4f7;
+  --color-surface--dark: #1a252f;
+  --color-border--dark: #3a4b5c;
+  --color-success--dark: #27ae60;
+  --color-text--dark: #ecf0f1;
+}
+
+@layer components {
+  .card {
+    @apply flex flex-col justify-between max-w-[300px] text-center rounded-xl hover:scale-105 transition-transform duration-300 ease-in-out;
+  }
+
+  .footer {
+    @apply brightness-125 bg-surface dark:bg-surface--dark text-primary dark:text-primary--dark text-center py-4 h-64;
+  }
+
+  .navbar {
+    @apply h-18 bg-surface dark:bg-surface--dark;
+  }
+
+  .section {
+    @apply bg-surface dark:bg-surface--dark even:brightness-75 text-primary dark:text-primary--dark flex flex-col items-center justify-center pt-8 pb-16;
+  }
+
+  .section header {
+    @apply text-3xl font-bold mb-8 mt-6 uppercase text-center;
+  }
+
+  .section p {
+    @apply text-lg mb-6;
+  }
+
+  .why {
+    @apply bg-cover bg-center bg-no-repeat;
+  }
+
+  .testimonials {
+    @apply bg-repeat bg-size-[300px] bg-white;
+  }
+
+  .partner {
+    @apply border border-red-500 text-center p-2 rounded-md shadow-2xl;
+  }
+}

@@ -1,0 +1,11 @@
+$font-family-base:
+  'Montserrat', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji',
+  'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+@forward 'vuetify/settings' with (
+  $utilities: false,
+  $reset: false,
+  $body-font-family: $font-family-base
+);
+
+@use 'tailwindcss';
