@@ -151,7 +151,7 @@ const signIn = () => {
 const signOut = () => {
   sessionStore.signOut()
   showProfileDrawer.value = false;
-  router.push('/home')
+  router.push('/')
 }
 
 const handleScroll = () => {

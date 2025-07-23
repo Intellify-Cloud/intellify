@@ -1,6 +1,5 @@
 import type { Configuration, Env } from '@/types/app'
 import { Api } from './enums'
-import axios from 'axios'
 
 let errorMessage: string
 let values: Env
@@ -8,13 +7,9 @@ let isOk = true
 
 try {
   const env = async (): Promise<Env> => {
-    if (import.meta.env.MODE === 'production') {
-      return (await axios.get<Env>('/env')).data
-    } else {
-      return {
-        VITE_ACCESS_API_URL: import.meta.env.VITE_ACCESS_API_URL,
-        VITE_BROADSHEET_API_URL: import.meta.env.VITE_BROADSHEET_API_URL,
-      }
+    return {
+      VITE_ACCESS_API_URL: import.meta.env.VITE_ACCESS_API_URL,
+      VITE_BROADSHEET_API_URL: import.meta.env.VITE_BROADSHEET_API_URL,
     }
   }
 

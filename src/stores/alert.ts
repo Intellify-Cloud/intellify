@@ -1,5 +1,10 @@
-import type { Alert, AlertStoreState } from '@/types/access'
+import type { Alert, AlertStoreState } from '@/types/app'
 import { defineStore } from 'pinia'
+
+export const messages = {
+  requestSent: 'The request has been submitted.  It may take a moment to process.',
+  working: 'Please wait until the current operation completes and then try again.',
+}
 
 let key = 0
 
@@ -19,9 +24,7 @@ export const useAlertStore = defineStore('alert', {
 
       alert.expire = alert.expire ?? true
       alert.expirySeconds = alert.expirySeconds ?? 10
-      alert.expiryDate = new Date(Date.now() + alert.expirySeconds * 1000)
-      alert.visiblePercentage = 100
-      alert.dismissable = alert.dismissable ?? !!alert.name
+      alert.dismissable = alert.dismissable || !!alert.name
 
       alert.key = `${alert.name}-${key++}`
 
@@ -49,8 +52,19 @@ export const useAlertStore = defineStore('alert', {
       return true
     },
     clear() {
-      this.alerts = this.alerts.filter((item) => !item.dismissable)
+      this.alerts = []
     },
-    initialize() {},
+    requestSent() {
+      this.add({
+        message: messages.requestSent,
+        name: 'request-sent',
+      })
+    },
+    working() {
+      this.add({
+        message: messages.working,
+        name: 'working-message',
+      })
+    },
   },
 })

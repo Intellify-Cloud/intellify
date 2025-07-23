@@ -1,5 +1,8 @@
 {
   "contact us": "Contact Us",
+  "messages": {
+    "fetching-oauth-providers": "(fetching authentication providers)"
+  },
   "portfolio-websites": "Portfolio Websites",
   "services": "Services",
   "sign-in": "Sign In",

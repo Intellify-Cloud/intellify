@@ -2,19 +2,25 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { useSessionStore } from '@/stores/session'
 import { useAlertStore } from '@/stores/alert'
 import { i18n } from '@/i18n'
+import Home from '../views/IntellifyHome.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path: '/',
+      name: 'home',
+      component: Home,
+    },
+    {
+      path: '',
+      name: 'home',
+      component: Home,
+    },
+    {
       path: '/contact-us',
       name: 'contact-us',
       component: () => import('../views/ContactUs.vue'),
-    },
-    {
-      path: '/home',
-      name: 'home',
-      component: () => import('../views/IntellifyHome.vue'),
     },
     {
       path: '/portfolio-websites',
@@ -64,13 +70,8 @@ router.beforeEach(async (to) => {
     }
   }
 
-  if (
-    to.fullPath === '/' ||
-    to.fullPath === '' ||
-    to.fullPath === '/dashboard' ||
-    to.fullPath === '/home'
-  ) {
-    const path = sessionStore.isAuthenticated ? '/dashboard' : '/home'
+  if (to.fullPath === '/' || to.fullPath === '' || to.fullPath === '/dashboard') {
+    const path = sessionStore.isAuthenticated ? '/dashboard' : '/'
 
     if (path !== to.fullPath) {
       router.push({ path: path })
