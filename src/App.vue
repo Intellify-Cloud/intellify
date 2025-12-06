@@ -3,7 +3,13 @@
     <v-layout>
       <i-navbar />
       <v-main>
-        <RouterView />
+        <router-view v-slot="{ Component }">
+          <transition enter-active-class="transition-opacity duration-500 ease-in-out"
+            leave-active-class="transition-opacity duration-500 ease-in-out" enter-from-class="opacity-0"
+            leave-to-class="opacity-0" mode="out-in">
+            <component :is="Component" />
+          </transition>
+        </router-view>
         <v-btn v-if="showScrollToTop" class="fixed bottom-0 right-0 m-4 z-100" :icon="mdiArrowUp" @click="backToTop()">
         </v-btn>
         <div class="footer">

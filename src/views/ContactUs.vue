@@ -8,7 +8,7 @@
       class="flex flex-col justify-center items-center h-32 text-2xl border rounded w-full md:w-2/5 p-4 mb-4 text-center">
       <span class="font-bold text-red-500">Oops! Something went wrong. Please try again later.</span>
       <span class="text-xl">You are welcome to e-mail us at <a
-          href="mailto:support@example.com">support@example.com</a></span>
+          href="mailto:pieter@intellify.co.za">pieter@intellify.co.za</a></span>
     </div>
     <v-form v-if="!busy" @submit.prevent="handleSubmit" class="w-full md:w-2/5">
       <div style=" position: absolute; left: -9999px;" aria-hidden="true">

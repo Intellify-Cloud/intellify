@@ -11,6 +11,7 @@ cd dist
 
 # if you are deploying to a custom domain
 echo 'www.intellify.co.za' > CNAME
+cp index.html 404.html
 touch .nojekyll
 
 git init

@@ -8,7 +8,8 @@
               Reach more customers</h2>
             <h1 class="font-bold text-6xl text-gray-200 text-shadow-lg text-shadow-gray-700 my-4 uppercase text-center">
               Go Online. Grow Online.</h1>
-            <v-btn class="m-8 h-12 rounded-full">Contact Us Today</v-btn>
+            <v-btn class="m-8 h-12 rounded-full" @click.stop="router.push({ name: 'contact-us' })">Contact Us
+              Today</v-btn>
           </div>
         </div>
       </v-parallax>
@@ -33,8 +34,10 @@
     <div class="section">
       <header>Some of our websites</header>
       <div class="mx-auto w-2/3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-        <v-img v-for="site in sites" :key="site.title" :src="site.logo" class="cursor-pointer h-20"
-          @click="openSite(site.url)" />
+        <div v-for="site in sites" :key="site.title" class="cursor-pointer dark:bg-neutral-300 p-6"
+          @click="openSite(site.url)">
+          <v-img :src="site.logo" class="h-12" />
+        </div>
       </div>
     </div>
     <div class="section">
@@ -50,7 +53,8 @@
             <p>Get your dream company name before someone else does.</p>
           </v-card-text>
           <v-card-actions class="justify-center m-4">
-            <v-btn class="rounded-full border-4 p-4 h-16 text">Contact us</v-btn>
+            <v-btn class="rounded-full border-4 p-4 h-16 text" @click.stop="router.push({ name: 'contact-us' })">Contact
+              us</v-btn>
           </v-card-actions>
         </v-card>
         <v-card class="card">
@@ -63,7 +67,8 @@
             </p>
           </v-card-text>
           <v-card-actions class="justify-center m-4">
-            <v-btn class="rounded-full border-4 p-4 h-16 text">Contact us</v-btn>
+            <v-btn class="rounded-full border-4 p-4 h-16 text" @click.stop="router.push({ name: 'contact-us' })">Contact
+              us</v-btn>
           </v-card-actions>
         </v-card>
         <v-card class="card">
@@ -76,7 +81,8 @@
               usability and drive conversion.</p>
           </v-card-text>
           <v-card-actions class="justify-center m-4">
-            <v-btn class="rounded-full border-4 p-4 h-16 text">Contact us</v-btn>
+            <v-btn class="rounded-full border-4 p-4 h-16 text" @click.stop="router.push({ name: 'contact-us' })">Contact
+              us</v-btn>
           </v-card-actions>
         </v-card>
       </div>
@@ -89,27 +95,28 @@ import { useMessageBus } from '@/stores/message-bus';
 import { mdiMonitorCellphone, mdiSpeedometer, mdiWeb } from '@mdi/js';
 
 const messageBus = useMessageBus();
+const router = useRouter();
 
 const sites = [
   {
     "title": "Oobalink",
     "url": "https://www.oobalink-ns.co.za/",
-    "logo": "/clients/oobalink.jpg"
+    "logo": "/clients/oobalink.png"
   },
   {
-    "title": "Designmodo",
+    "title": "Homeloans and Bonds",
     "url": "https://www.homeloansandbonds.co.za/",
-    "logo": "/clients/designmodo.jpg"
+    "logo": "/clients/homeloans-and-bonds.webp"
   },
   {
     "title": "Themeforest",
-    "url": "https://www.evochanellemacey.co.za/",
-    "logo": "/clients/themeforest.jpg"
+    "url": "https://www.evoeverywhere.co.za/",
+    "logo": "/clients/evo-everywhere.png"
   },
   {
     "title": "Apex Coaching",
     "url": "https://www.apexcoaching.co.za/",
-    "logo": "/clients/apexcoaching.jpg"
+    "logo": "/clients/apex-coaching.png"
   }
 ];
 
