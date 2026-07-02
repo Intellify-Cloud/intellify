@@ -1,0 +1,56 @@
+@import "./base.css";
+
+@theme {
+    --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+
+    --color-action-surface: var(--color-gray-900);
+    --color-action-surface-hover: var(--color-gray-800);
+    --color-action-surface-muted: var(--color-gray-700);
+    --color-action-fg: var(--color-gray-200);
+    --color-fg: var(--color-neutral-700);
+    --color-primary: var(--color-orange-500);
+    --color-primary-hover: var(--color-orange-400);
+    --color-primary-muted: var(--color-orange-300);
+    --color-stroke: var(--color-gray-950);
+    --color-stroke-muted: var(--color-neutral-300);
+    --color-surface: var(--color-neutral-100);
+    --color-surface-muted: var(--color-neutral-300);
+    --color-surface-soft: var(--color-neutral-200);
+}
+
+@layer theme {
+    .dark {
+        --color-action-surface: var(--color-gray-300);
+        --color-action-surface-hover: var(--color-gray-200);
+        --color-action-surface-muted: var(--color-gray-400);
+        --color-action-fg: var(--color-gray-900);
+        --color-fg: var(--color-neutral-400);
+        --color-primary: var(--color-orange-700);
+        --color-primary-hover: var(--color-orange-800);
+        --color-primary-muted: var(--color-orange-500);
+        --color-stroke: var(--color-gray-50);
+        --color-stroke-muted: var(--color-neutral-900);
+        --color-surface: var(--color-neutral-950);
+        --color-surface-muted: var(--color-neutral-700);
+        --color-surface-soft: var(--color-neutral-900);
+    }
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family:
+            Outfit,
+            ui-sans-serif,
+            system-ui,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            sans-serif;
+        color: var(--color-fg);
+        background-color: var(--color-surface);
+    }
+}

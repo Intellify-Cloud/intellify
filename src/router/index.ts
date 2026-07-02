@@ -1,97 +1,54 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import { useSessionStore } from '@/stores/session'
-import { useAlertStore } from '@/stores/alert'
-import { i18n } from '@/i18n'
-import Home from '../views/IntellifyHome.vue'
+import { createRouter, createWebHistory } from "vue-router";
+import { useSeoHead } from "@/composables/useSeoHead";
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: Home,
+      path: "/",
+      component: () => import("@/views/AppHome.vue"),
+      meta: {
+        title: "Home",
+        description:
+          "Managed website subscriptions for South African businesses that want a professional online presence without upfront build costs.",
+      },
     },
-    {
-      path: '',
-      name: 'home',
-      component: Home,
-    },
-    {
-      path: '/contact-us',
-      name: 'contact-us',
-      component: () => import('../views/ContactUs.vue'),
-    },
-    {
-      path: '/portfolio-websites',
-      name: 'portfolio-websites',
-      component: () => import('../views/PortfolioWebsites.vue'),
-    },
-    {
-      path: '/privacy-policy',
-      name: 'privacy-policy',
-      component: () => import('../views/PrivacyPolicy.vue'),
-    },
-    {
-      path: '/sign-in',
-      name: 'sign-in',
-      component: () => import('../views/SignIn.vue'),
-    },
+    // {
+    //   path: '/portfolio/',
+    //   component: () => import('@/views/PortfolioView.vue'),
+    //   meta: {
+    //     title: 'Portfolio',
+    //     description: 'Take a look at some of the beautiful, high-performing websites we've built for our clients.',
+    //   },
+    // },
+    // {
+    //   path: '/contact/',
+    //   component: () => import('@/views/ContactView.vue'),
+    //   meta: {
+    //     title: 'Contact',
+    //     description: 'Have a question or ready to get started? Send us a message and we'll get back to you.',
+    //   },
+    // },
+    // {
+    //   path: '/privacy-policy/',
+    //   component: () => import('@/views/PrivacyView.vue'),
+    //   meta: {
+    //     title: 'Privacy Policy',
+    //     description: 'This Privacy Policy describes how your personal information is collected, used, and shared when you visit Intellify.',
+    //   },
+    // },
   ],
   scrollBehavior(to, from, savedPosition) {
-    if (to.hash) {
-      return {
-        el: to.hash,
-        behavior: 'smooth', // or 'auto'
-        top: 64,
-      }
-    }
-
-    if (savedPosition) {
-      return savedPosition
-    }
-
-    return { top: 0 }
+    return savedPosition || { top: 0, behavior: "smooth" };
   },
-})
+});
 
-router.beforeEach(async (to) => {
-  const sessionStore = useSessionStore()
+router.afterEach((to) => {
+  useSeoHead({
+    title: to.meta.title as string,
+    description: to.meta.description as string,
+    path: to.path,
+  });
+});
 
-  if (window.location.pathname === '/oauth') {
-    return
-  }
-
-  try {
-    await sessionStore.initialize()
-  } catch {
-    if (!window.location.pathname.startsWith('/sign-in')) {
-      router.push({ path: '/sign-in' })
-    }
-  }
-
-  if (to.fullPath === '/' || to.fullPath === '' || to.fullPath === '/dashboard') {
-    const path = sessionStore.isAuthenticated ? '/dashboard' : '/'
-
-    if (path !== to.fullPath) {
-      router.push({ path: path })
-      return true
-    }
-  }
-
-  if (!!to.meta.permission && !sessionStore.hasPermission(to.meta.permission as string)) {
-    useAlertStore().add({
-      message: i18n.global.t('exceptions.insufficient-permission'),
-      type: 'info',
-      name: 'insufficient-permission',
-    })
-
-    return false
-  }
-
-  if (!!to.meta.authenticated && !sessionStore.isAuthenticated && to.name !== 'signin') {
-    return { name: 'signin' }
-  }
-})
-
-export default router
+export default router;
