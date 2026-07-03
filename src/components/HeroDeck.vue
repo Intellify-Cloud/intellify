@@ -50,7 +50,7 @@ const pills = [...site.hero.marquee_row1, ...site.hero.marquee_row2].slice(0, 9)
     padding: 128px 0 64px;
     background:
         radial-gradient(circle at 20% 20%, rgba(234, 88, 12, 0.18), transparent 30%),
-        radial-gradient(circle at 80% 80%, rgba(245, 158, 11, 0.16), transparent 28%),
+        radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.16), transparent 28%),
         linear-gradient(180deg, var(--color-surface), var(--color-surface));
 }
 

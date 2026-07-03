@@ -1,20 +1,20 @@
 <template>
-    <nav class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-5xl">
+    <nav class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-3rem)] max-w-6xl">
         <div
             class="flex flex-row items-center justify-between gap-4 bg-neutral-100 dark:bg-neutral-900 rounded-full px-4.5 py-2.5 shadow-sm border border-neutral-200 dark:border-neutral-700">
             <!-- Brand -->
-            <div @click.prevent="home" :aria-label="`${site.name} home`"
+            <RouterLink to="/" :aria-label="`${site.name} home`"
                 class="cursor-pointer flex flex-row items-center gap-2 hover:opacity-80 transition-opacity">
-                <span class="w-2.5 h-2.5 rounded-full bg-orange-500 shrink-0 mr-1"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-orange-500 mr-1"></span>
                 <span class="text-2xl font-bold text-neutral-900 dark:text-neutral-100">{{ site.nav.logo }}</span>
-            </div>
+            </RouterLink>
 
             <!-- Desktop links -->
             <div class="hidden md:flex item-start gap-2 grow">
-                <a v-for="link in site.nav.links" :key="link.href" :href="link.href"
+                <RouterLink v-for="link in site.nav.links" :key="link.href" :to="link.href || '/'"
                     class="font-semibold text-neutral-500 hover:text-orange-500 px-3 py-1.5">
                     {{ link.label }}
-                </a>
+                </RouterLink>
             </div>
 
             <!-- Actions -->
@@ -49,14 +49,10 @@ import { onMounted, ref } from 'vue'
 import site from '@/assets/site.json'
 import IconLightMode from './icons/IconLightMode.vue'
 import IconDarkMode from './icons/IconDarkMode.vue'
-import router from '@/router/index.ts'
+import { RouterLink } from 'vue-router'
 
 const menuOpen = ref(false)
 const isDark = ref(false)
-
-const home = () => {
-    router.push('/')
-}
 
 const toggleTheme = () => {
     isDark.value = !isDark.value

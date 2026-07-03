@@ -3,7 +3,7 @@
         aria-labelledby="services-heading">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="max-w-2xl mx-auto text-center mb-12 md:mb-16">
-                <p class="text-sm font-semibold uppercase tracking-widest text-primary mb-3">
+                <p class="text-sm font-extrabold uppercase tracking-widest text-primary mb-3">
                     {{ site.offerings.kicker }}
                 </p>
                 <h2 id="services-heading" class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
@@ -18,7 +18,7 @@
                 <article v-for="plan in site.offerings.plans" :key="plan.name"
                     class="relative rounded-2xl border p-8 flex flex-col h-full" :class="plan.featured
                         ? 'border-primary bg-surface-muted shadow-xl scale-100 md:scale-105 ring-1 ring-primary'
-                        : 'border-gray-200 bg-surface-soft shadow-sm'">
+                        : 'border-stroke bg-surface-soft shadow-sm'">
                     <div v-if="plan.badge"
                         class="absolute -top-3 left-8 rounded-full px-3 py-1 text-xs font-semibold text-action-fg"
                         :class="plan.featured
@@ -27,25 +27,25 @@
                         {{ plan.badge }}
                     </div>
 
-                    <h3 class="text-xl font-semibold text-gray-900 mt-2 mb-2">
+                    <h3 class="text-xl font-semibold mt-2 mb-2">
                         {{ plan.name }} Website Plan
                     </h3>
-                    <p class="text-gray-600 mb-6">
+                    <p class="mb-6">
                         {{ plan.description }}
                     </p>
 
                     <div class="flex items-baseline gap-1 mb-6">
-                        <span class="text-sm text-gray-500">{{ plan.price_prefix }}</span>
-                        <strong class="text-4xl font-bold text-gray-900">
+                        <span class="text-sm">{{ plan.price_prefix }}</span>
+                        <strong class="text-4xl font-bold">
                             {{ getPrice(plan.price_key) }}
                         </strong>
-                        <span class="text-sm text-gray-500">{{ plan.price_suffix }}</span>
+                        <span class="text-sm">{{ plan.price_suffix }}</span>
                     </div>
 
                     <ul class="space-y-3 mb-8 flex-1">
                         <li v-for="feature in plan.features" :key="feature"
-                            class="flex items-start gap-2 text-sm text-gray-600">
-                            <span class="text-indigo-600 mt-0.5" aria-hidden="true">&#10003;</span>
+                            class="flex items-start gap-2 text-sm text-fg-muted">
+                            <span class="text-primary mt-0.5" aria-hidden="true">&#10003;</span>
                             <span>{{ feature }}</span>
                         </li>
                     </ul>

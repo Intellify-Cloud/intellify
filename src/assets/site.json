@@ -9,8 +9,8 @@
     "links": [
       { "label": "Mission", "href": "/#mission" },
       { "label": "Pricing", "href": "/#services" },
-      { "label": "Portfolio", "href": "/portfolio/" },
-      { "label": "Contact", "href": "/contact/" }
+      { "label": "Portfolio", "href": "/portfolio" },
+      { "label": "Contact", "href": "/contact" }
     ]
   },
   "prices": {
@@ -159,7 +159,7 @@
         "description": "A premium managed site for businesses that want rich media, regular improvements, and analytics.",
         "cta": "Go Premium",
         "features": [
-          "Everything in Recommended",
+          "Everything in Standard",
           "Multi-page structure",
           "SEO optimized build",
           "Embedded video section",
@@ -276,9 +276,9 @@
         ]
       },
       {
-        "name": "Recommended",
+        "name": "Standard",
         "badge": "Best fit",
-        "price_key": "recommended",
+        "price_key": "standard",
         "suffix": "/ month",
         "description": "A fuller multi-page site for businesses ready to look more established and capture enquiries through a contact form.",
         "features": [
@@ -303,7 +303,7 @@
         "suffix": "/ month",
         "description": "A premium managed website with room to grow, rich media, monthly improvements, and analytics so you can understand your visitors.",
         "features": [
-          "Everything in Recommended",
+          "Everything in Standard",
           "Multiple pages",
           "Custom navigation bar and branded logo placement",
           "Elaborate hero section",

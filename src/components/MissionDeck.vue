@@ -1,7 +1,7 @@
 <template>
     <section id="mission" v-if="site.mission.show" class="py-16 md:py-24 lg:py-32" aria-labelledby="mission-heading">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p class="text-sm font-semibold uppercase tracking-widest mb-3">
+            <p class="text-sm font-semibold uppercase tracking-widest mb-3  text-primary">
                 {{ site.mission.title }}
             </p>
             <h2 id="mission-heading" class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-12">
